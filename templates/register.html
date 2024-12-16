@@ -1,0 +1,41 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script>
+        async function registerUser(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const jsonData = Object.fromEntries(formData);
+
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            });
+
+            const result = await response.json();
+            alert(JSON.stringify(result));
+        }
+    </script>
+</head>
+<body>
+    <h1>Register User</h1>
+    <form onsubmit="registerUser(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address"><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

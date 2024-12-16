@@ -1,0 +1,38 @@
+<!-- update.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Address</title>
+    <script>
+        async function updateAddress(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const jsonData = Object.fromEntries(formData);
+            const username = document.getElementById('username').value;
+
+            const response = await fetch('/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            });
+
+            const result = await response.json();
+            alert(JSON.stringify(result));
+        }
+    </script>
+</head>
+<body>
+    <h1>Update Address</h1>
+    <form onsubmit="updateAddress(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="address">New Address:</label>
+        <input type="text" id="address" name="address" required><br>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

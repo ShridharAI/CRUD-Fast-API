@@ -1,0 +1,30 @@
+<!-- delete.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete User</title>
+    <script>
+        async function deleteUser(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+
+            const response = await fetch(`/delete/${username}`, {
+                method: 'DELETE'
+            });
+
+            const result = await response.json();
+            alert(JSON.stringify(result));
+        }
+    </script>
+</head>
+<body>
+    <h1>Delete User</h1>
+    <form onsubmit="deleteUser(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        <button type="submit">Delete</button>
+    </form>
+</body>
+</html>
